@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Gmail Email Tracker",
+  "version": "1.0.0",
+  "description": "Track email opens, link clicks, and attachment downloads in Gmail",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "https://zrmxcyydqobgyakihgzq.supabase.co/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["assets/content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "service_worker": "assets/background.js",
+    "type": "module"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' https://zrmxcyydqobgyakihgzq.supabase.co/* data:;"
+  }
+}
